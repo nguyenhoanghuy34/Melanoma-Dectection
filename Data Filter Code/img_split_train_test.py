@@ -1,6 +1,5 @@
 import os
 import pandas as pd
-import random
 import shutil
 
 # Đường dẫn thư mục ảnh và metadata
@@ -22,14 +21,15 @@ os.makedirs(test_img_dir, exist_ok=True)
 # Đọc file CSV gốc
 df = pd.read_csv(csv_path)
 
-# Xáo trộn
+# Xáo trộn để đảm bảo tính ngẫu nhiên
 df_shuffled = df.sample(frac=1, random_state=42).reset_index(drop=True)
 
 # Chia 1000 train, 200 test
 train_df = df_shuffled.iloc[:1000]
 test_df = df_shuffled.iloc[1000:1200]
 
-# Copy ảnh vào thư mục train
+
+
 for idx, row in train_df.iterrows():
     src_path = os.path.join(img_dir, row['image'] + '.png')
     dst_path = os.path.join(train_img_dir, row['image'] + '.png')
@@ -47,8 +47,10 @@ for idx, row in test_df.iterrows():
     else:
         print(f"[TEST] MISSING: {src_path}")
 
-# Lưu file CSV tương ứng
+
+
+
 train_df.to_csv(train_csv_path, index=False)
 test_df.to_csv(test_csv_path, index=False)
 
-print("✅ Đã chia thành tập huấn luyện (1000 ảnh) và kiểm tra (200 ảnh).")
+print("Đã chia thành tập huấn luyện (1000 ảnh) và kiểm thử (200 ảnh).")
