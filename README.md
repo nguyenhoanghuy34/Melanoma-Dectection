@@ -180,6 +180,37 @@ Có thể chạy toàn bộ pipeline hoặc từng bước riêng lẻ tùy theo
 
 <!-- Markdown Markdown Markdown Markdown Markdown Markdown Markdown Markdown Markdown Markdown Markdown Markdown Markdown Markdown -->
 
+## Pipeline / Workflow
+
+Hệ thống được xây dựng theo pipeline gồm hai giai đoạn chính:
+
+### First Training: Melanoma Classification
+
+<img src="Pipeline/First_model.png" width="300"/>
+
+Giai đoạn đầu sử dụng mô hình phân loại để xác định loại tổn thương da.
+
+- Input: Ảnh da đầu vào.
+- Model: ResNet50 kết hợp với Random Forest.
+- Output:
+  - Melanoma
+  - Non-Melanoma
+
+Mục đích của bước này là xác định nhóm bệnh trước khi thực hiện các bước phân tích tiếp theo.
+
+
+### Second Training: Lesion Segmentation
+
+<img src="Pipeline/Second_model.png" width="300"/>
+
+Giai đoạn thứ hai tập trung vào phân vùng vùng tổn thương trên ảnh da.
+
+- Input: Ảnh da.
+- Model: U-Net.
+- Output: Mask nhị phân vùng tổn thương.
+
+Kết quả segmentation được sử dụng để hỗ trợ quá trình trích xuất đặc trưng và phân tích vùng Melanoma.
+
 <!-- Markdown Markdown Markdown Markdown Markdown Markdown Markdown Markdown Markdown Markdown Markdown Markdown Markdown Markdown -->
 <!-- Markdown Markdown Markdown Markdown Markdown Markdown Markdown Markdown Markdown Markdown Markdown Markdown Markdown Markdown -->
 <!-- Markdown Markdown Markdown Markdown Markdown Markdown Markdown Markdown Markdown Markdown Markdown Markdown Markdown Markdown -->
